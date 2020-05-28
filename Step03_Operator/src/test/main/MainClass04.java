@@ -20,11 +20,11 @@ public class MainClass04 {
 		boolean result19 = !false; //true
 		
 		boolean isRun=false;
-		if(isRun != true){
+		if(isRun != true){	//true 반환 isRun이 트루가 아니면
 			System.out.println("달리지 않아요");
 		}
 		
-		if(!isRun){
+		if(!isRun){//true 반환 isRun이 트루가 아니면
 			System.out.println("달리지 않아요2");
 		}
 	}	
