@@ -11,5 +11,7 @@ public class MyUtil {
 	//static이 부여된 것들 은 클래스명으로 구분이된다.
 	public static void send() {
 		System.out.println("전송합니다.");
+
 	}
 }
+//스테틱 필드와 메소드만 가지고 있는 wrapper 역할을한다.

@@ -28,6 +28,8 @@ public class Mainclass08 {
 		m1.energy-=10; //energy는 스테틱이 아니기 때문에 energy에 영향을주지않느다.
 		m1.showEnergy(); //30 
 		m2.showEnergy(); //40
+		System.out.println();
+	// 클래스명 .필드명.메서드명();
 	}
 
 
