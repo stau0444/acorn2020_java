@@ -9,6 +9,9 @@ public class Computer {
 	public Computer(Cpu cpu) {
 		this.cpu=cpu;
 	}
+	public Computer() {
+		System.out.println("기본 생성자가 호출되었습니다.");
+	}
 	//메소드
 	public void doGame() {
 		if(this.cpu==null) {

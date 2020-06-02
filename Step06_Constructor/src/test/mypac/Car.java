@@ -8,6 +8,7 @@ public class Car {
 	public Car(String name, String color){
 		//매개변수명은 뭐를 입력해야 하는지에 대해서 힌트를 줘야한다. 
 		//생성자의 인자로 전달 받은 값을 필드에 저장
+		//new 할때 인자로 뭔가를 전달받고 지역내에서 활용을하겠다.
 		this.name=name;
 		this.color=color;
 	}
