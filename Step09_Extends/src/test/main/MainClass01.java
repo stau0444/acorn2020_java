@@ -27,6 +27,19 @@ public class MainClass01 {
 		p3.call();
 		p3.mobileCall();
 		//필드나 지역변수에 데이터 타입을 선언할 떄 데이터타입은 사용설명서과 같다.
+		HandPhone newP=(HandPhone)p5;
+		newP.call();
+		newP.mobileCall();
+//		p1.moilecall()오류가 뜬다. p1은 phone type 이어서 HandPhone의 기능 사용불가
+		HandPhone newP1= (HandPhone)p1;
+		newP1.mobileCall(); 
+		// p1을 HandPhone type 으로 형 변환하여 newp1에 담았기 때문에 p1과 new p1은 같은 참조값을 가르키지만 new   
+		
+		  
+		// 부모타입을 자식타입으로 캐스팅하겠다
+		//Object type이었던 p2의 데이터 타입이 HandPhone오로 바뀜
+		//p5의 설명서가 바뀌기 떄문에  p5를 HandPhone으로 형변환하여 대입한 newP에서는 p5와 같은 참조 값을 가리키며
+		//자식타입의 기능들을 사용할 수 있다.
 	/*	
 	 * 	God of java
 		class Wonderful{
