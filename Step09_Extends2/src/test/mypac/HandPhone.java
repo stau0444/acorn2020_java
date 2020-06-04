@@ -5,5 +5,9 @@ public class HandPhone extends Phone {
 	public void mobileCall() {
 		System.out.println("이동 중에 전화 걸어"); //override
 	}
+	//사진찍는 메소드
+	public void photo() {
+		System.out.println("30만 화소 사진 찍어");
+	}
 
 }
