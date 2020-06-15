@@ -18,6 +18,7 @@ public class MainClass06 {
 			result2="기다리지 않아요";
 		}
 		System.out.println(result2);
+	
 	}
 }
 

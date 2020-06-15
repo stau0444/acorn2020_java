@@ -1,9 +1,13 @@
 package test.main;
+
+import java.util.Random;
+import java.util.Scanner;
+
 /*
  *  [ Java 기본 데이터 type ]
  *  
  *  1. 숫자형
- *  
+ *  char blooean
  *  정수형 : byte, short, int, long
  *  
  *  - byte 변수명;  // -128 ~ 127
@@ -21,6 +25,12 @@ public class MainClass01 {
 	public static void main(String[] args) {
 		System.out.println("main 메소드가 시작 되었습니다.");
 		//정수형 변수 선언하고 값 대입하기
+		Random r1=new Random();
+		int ran=r1.nextInt(30);
+		System.out.println(ran);
+		Scanner scan =new Scanner(System.in);
+		System.out.println("입력하세요");
+		scan.nextLine();
 		byte iByte=10;
 		short iShort=10;
 		int iInt=10;
