@@ -14,8 +14,8 @@ import test.mypac.CountRunnable;
 import test.mypac.CountThread;
 
 
-public class Frame04 extends JFrame implements ActionListener{
-	public Frame04() {
+public class Frame03 extends JFrame implements ActionListener{
+	public Frame03() {
 		setLayout(new BorderLayout());
 		JPanel panel=new JPanel();
 		panel.setBackground(Color.yellow);
@@ -26,7 +26,7 @@ public class Frame04 extends JFrame implements ActionListener{
 		countBtn.addActionListener(this);
 	}
 	public static void main(String[] args) {
-		Frame04 frame= new Frame04();
+		Frame03 frame= new Frame03();
 		frame.setTitle("Frame01");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100,100,500,500);
@@ -37,30 +37,10 @@ public class Frame04 extends JFrame implements ActionListener{
 	//스레드상속 런메소드 오버라이드 스타트 메서드 호출
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//익명의 클래스를 생성해서 Runnable 타입의 객채를생성하고 메소드를 오버라이드해줬다.
-		Runnable r=new Runnable() {
-
-			@Override
-			public void run() {
-				int count = 1;
-
-				while (true) {
-					try {
-
-						Thread.sleep(1000);
-
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					System.out.println(count);
-					count++;
-					if (count == 11) {
-						break;
-					}
-				}
-			}
-			
-		};
+		
+		//누른 만큼 새로운 스래드가 생긴다
+		// countThread 객채생성하고
+		CountRunnable r=new CountRunnable();
 		//쓰레드를 상속받지않고 바로 쓰레드에 runnable 타입을 인자로 넣어준다.
 		Thread t= new Thread(r);
 		//start 메소드호출

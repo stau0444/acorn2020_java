@@ -34,37 +34,36 @@ public class Frame05 extends JFrame implements ActionListener{
 		
 
 	}
-	//스레드상속 런메소드 오버라이드 스타트 메서드 호출
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//익명의 클래스를 생성해서 Runnable 타입의 객채를생성하고 메소드를 오버라이드해줬다.
-		Runnable r=new Runnable() {
 
-			@Override
-			public void run() {
-				int count = 1;
+		
+//		new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				
+//			}
+//		}).start();
+		//오버라이드 메소드 한가지면 람다식 사용가능
+		new Thread(()->{
+			int count = 1;
 
-				while (true) {
-					try {
+			while (true) {
+				try {
 
-						Thread.sleep(1000);
+					Thread.sleep(1000);
 
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					System.out.println(count);
-					count++;
-					if (count == 11) {
-						break;
-					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println(count);
+				count++;
+				if (count == 11) {
+					break;
 				}
 			}
-			
-		};
-		//쓰레드를 상속받지않고 바로 쓰레드에 runnable 타입을 인자로 넣어준다.
-		Thread t= new Thread(r);
-		//start 메소드호출
-		t.start();
+		}).start();
 		System.out.println("새로운 스레드 시작");
 	}
 }
