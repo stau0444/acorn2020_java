@@ -36,12 +36,12 @@ public class MemberDAO {
 
 	// 회원 한명의 정보를 리턴해주는 메소드
 	public MemberDto getData(int num) {
-
+		
 		MemberDto dto = null;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
+		
 		try {
 			String sql = "SELECT num,name,addr" + " FROM member" + " WHERE num=?";
 			conn = new DBConnect().getConn();
@@ -72,26 +72,62 @@ public class MemberDAO {
 				// TODO: handle exception
 			}
 		}
-
+		
 		return dto;
 
 	}
 
 	// 회원의 목록을 리턴해주는 메소드
-	public List<MemberDto> getList() {
+	public List<MemberDto> getList(){
+		//회원 목록을 담을 객체 생성
 		List<MemberDto> list=new ArrayList<>();
+		
 		Connection conn=null;
-		PreparedStatement ps=null;
-		   
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			//DBConnect 객체를 이용해서 Connection 객체의 참조값을 얻어온다.
+			conn=new DBConnect().getConn();
+			//실행할 sql 문
+			String sql="SELECT num,name,addr"
+					+ " FROM member"
+					+ " ORDER BY num ASC";
+			pstmt=conn.prepareStatement(sql);
+			//query 문 수행하고 결과 얻어오기
+			rs=pstmt.executeQuery();
+			//반복문 돌면서 select 된 회원정보  읽어오기
+			while(rs.next()) {
+				//회원정보를 list 에 담아 보세요.
+				int num=rs.getInt("num");
+				String name=rs.getString("name");
+				String addr=rs.getString("addr");
+				//MemberDto 객체를 생성해서 회원 한명의 정보를 담는다.
+				MemberDto dto=new MemberDto();
+				dto.setNum(num);
+				dto.setName(name);
+				dto.setAddr(addr);
+				//MemberDto 객체를 List 에 누적 시킨다.
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				//객체를 사용했던 순서 역순으로 닫아준다.
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e) {}
+		}
 		
-		
-		return null;
+		return list;
 	}
 
 	// 회원 정보를 db에 저장하는 메소드
-	public void insert(MemberDto dto) {
+	public boolean insert(MemberDto dto) {
 		Connection conn = null;
 		PreparedStatement ps = null;
+		int flag=0;
 		try {
 			String sql = "insert into member" + 
 						 " (num,name,addr)" + " "
@@ -100,7 +136,7 @@ public class MemberDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getName());
 			ps.setString(2, dto.getAddr());
-			ps.executeUpdate();
+			flag=ps.executeUpdate();
 			System.out.println("회원정보 추가됨");
 
 		} catch (Exception e) {
@@ -114,19 +150,24 @@ public class MemberDAO {
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
+			if(flag>0) {
+				return true;
+			}
 		}
+		return true;
 	}
 
 	// 회원정보 삭제 메소드
-	public void delete(int num) {
+	public boolean delete(int num) {
 		Connection conn = null;
 		PreparedStatement ps = null;
+		int i=0;
 		try {
 			String sql = "DELETE FROM member WHERE num=?";
 			conn = new DBConnect().getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, num);
-			ps.executeUpdate();
+			i=ps.executeUpdate();
 			System.out.println("회원 정보를 삭제 했습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,7 +179,14 @@ public class MemberDAO {
 					conn.close();
 			} catch (Exception e2) {
 			}
+		
 		}
+		if(i>0) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 
 	// 회원 정보를 db에서 수정하는 메소드
